@@ -95,12 +95,12 @@ public class ArtemisCoreConfig {
     }
 
     // --- ProducerPools
-    @Bean(name = "syncProducerPool")
+    @Bean(name = "syncProducerPool", initMethod = "init", destroyMethod = "destroy")
     public ProducerPool syncProducerPool(@Qualifier("syncSessionFactory") ClientSessionFactory syncSessionFactory) {
         return new ProducerPool(syncSessionFactory, props);
     }
 
-    @Bean(name = "asyncProducerPool")
+    @Bean(name = "asyncProducerPool", initMethod = "init", destroyMethod = "destroy")
     public ProducerPool asyncProducerPool(@Qualifier("asyncSessionFactory") ClientSessionFactory asyncSessionFactory) {
         return new ProducerPool(asyncSessionFactory, props);
     }
